@@ -52,11 +52,6 @@
     "semver": "^7.7.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.28.0",
-    "@babel/plugin-transform-runtime": "^7.28.0",
-    "@babel/preset-env": "^7.28.0",
-    "@babel/runtime": "^7.28.2",
-    "@babel/types": "^7.28.2",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-angular": "^19.8.1",
     "commitizen": "^4.3.1",
@@ -95,14 +90,6 @@
     ],
     "testPathIgnorePatterns": [
       "/__tests__/__fixtures__/*"
-    ]
-  },
-  "babel": {
-    "presets": [
-      "@babel/env"
-    ],
-    "plugins": [
-      "@babel/plugin-transform-runtime"
     ]
   },
   "config": {

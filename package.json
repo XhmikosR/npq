@@ -9,9 +9,9 @@
   "scripts": {
     "lint": "eslint && npm run lint:lockfile",
     "lint:lockfile": "lockfile-lint --path package-lock.json --type npm --validate-https --allowed-hosts npm npm",
-    "test": "cross-env NODE_OPTIONS=\"--experimental-vm-modules\" jest",
+    "test": "jest",
     "build": "node scripts/build.js",
-    "test:watch": "cross-env NODE_OPTIONS=\"--experimental-vm-modules\" jest --watch",
+    "test:watch": "jest --watch",
     "coverage:view": "opn coverage/lcov-report/index.html",
     "commit": "git-cz",
     "format": "prettier --config .prettierrc.js --write \"**/*.js\"",
@@ -60,11 +60,11 @@
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-angular": "^19.8.1",
     "commitizen": "^4.3.1",
-    "cross-env": "^10.0.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.32.0",
     "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-security": "^3.0.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-security": "^1.7.1",
     "husky": "^9.1.7",
     "jest": "^30.0.5",
     "lint-staged": "^16.1.4",
@@ -118,8 +118,7 @@
   "lint-staged": {
     "**/*.js": [
       "npm run format",
-      "npm run lint",
-      "git add"
+      "npm run lint"
     ]
   },
   "eslintConfig": {

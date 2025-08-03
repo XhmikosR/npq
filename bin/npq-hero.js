@@ -71,7 +71,6 @@ marshall
   })
   .then((result) => {
     if (result && result.countErrors > 0) {
-      // eslint-disable-next-line no-console
       console.log()
       return cliPrompt.prompt({
         name: 'install',
@@ -80,7 +79,6 @@ marshall
       })
     } else {
       if (result && result.countWarnings > 0) {
-        // eslint-disable-next-line no-console
         console.log()
         return cliPrompt.autoContinue({
           name: 'install',

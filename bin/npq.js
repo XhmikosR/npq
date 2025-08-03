@@ -97,7 +97,6 @@ Promise.resolve()
     }
 
     if (result && result.countErrors > 0) {
-      // eslint-disable-next-line no-console
       console.log()
       return cliPrompt.prompt({
         name: 'install',
@@ -106,7 +105,6 @@ Promise.resolve()
       })
     } else {
       if (result && result.countWarnings > 0) {
-        // eslint-disable-next-line no-console
         console.log()
         return cliPrompt.autoContinue({
           name: 'install',

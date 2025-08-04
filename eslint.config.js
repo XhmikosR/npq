@@ -1,6 +1,8 @@
+'use strict'
+
 const { defineConfig } = require('eslint/config')
 const nodePlugin = require('eslint-plugin-n')
-const pluginSecurity = require('eslint-plugin-security')
+const securityPlugin = require('eslint-plugin-security')
 const globals = require('globals')
 
 module.exports = defineConfig([
@@ -17,7 +19,7 @@ module.exports = defineConfig([
   {
     plugins: {
       n: nodePlugin,
-      security: pluginSecurity
+      security: securityPlugin
     },
     languageOptions: {
       globals: {
@@ -25,15 +27,11 @@ module.exports = defineConfig([
         ...globals.jest
       },
       ecmaVersion: 2021,
-      sourceType: 'commonjs',
-      parserOptions: {
-        ecmaFeatures: {
-          impliedStrict: true
-        }
-      }
+      sourceType: 'commonjs'
     },
     rules: {
       semi: 'off',
+      strict: 'error',
       'no-process-exit': 'off',
       'n/no-unsupported-features': 'off',
       'n/no-unpublished-require': 'off',

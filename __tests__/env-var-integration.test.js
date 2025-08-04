@@ -1,5 +1,7 @@
 // __tests__/env-var-integration.test.js
 
+'use strict'
+
 // Test the NPQ_PKG_MGR environment variable functionality
 // This tests the key logic change: process.env.NPQ_PKG_MGR || values.packageManager || values.pkgMgr || 'npm'
 

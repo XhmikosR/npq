@@ -1,3 +1,5 @@
+'use strict'
+
 jest.mock('pacote', () => {
   return {
     // manifest method should be a promise that resolves to a value:

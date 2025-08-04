@@ -1,3 +1,5 @@
+'use strict'
+
 jest.mock('pacote')
 
 const ProvenanceMarshall = require('../lib/marshalls/provenance.marshall')

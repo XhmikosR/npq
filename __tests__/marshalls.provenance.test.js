@@ -58,7 +58,7 @@ describe('Provenance test suites', () => {
 
     const testMarshall = new ProvenanceMarshall({
       packageRepoUtils: {
-        getPackageInfo: (pkgInfo) => {
+        getPackageInfo: () => {
           return new Promise((resolve) => {
             resolve({
               name: pkg.packageName,
@@ -125,7 +125,7 @@ describe('Provenance test suites', () => {
 
     const testMarshall = new ProvenanceMarshall({
       packageRepoUtils: {
-        getPackageInfo: (pkgInfo) => {
+        getPackageInfo: () => {
           return new Promise((resolve) => {
             resolve({
               name: pkg.packageName,
@@ -178,7 +178,7 @@ describe('Provenance test suites', () => {
 
     const testMarshall = new ProvenanceMarshall({
       packageRepoUtils: {
-        getPackageInfo: (pkgInfo) => {
+        getPackageInfo: () => {
           return new Promise((resolve) => {
             resolve({
               name: pkg.packageName,

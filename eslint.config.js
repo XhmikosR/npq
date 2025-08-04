@@ -1,5 +1,6 @@
 'use strict'
 
+const js = require('@eslint/js')
 const { defineConfig } = require('eslint/config')
 const nodePlugin = require('eslint-plugin-n')
 const securityPlugin = require('eslint-plugin-security')
@@ -17,7 +18,10 @@ module.exports = defineConfig([
     ]
   },
   {
+    files: ['**/*.js'],
+    extends: ['js/recommended'],
     plugins: {
+      js,
       n: nodePlugin,
       security: securityPlugin
     },

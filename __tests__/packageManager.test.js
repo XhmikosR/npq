@@ -5,7 +5,7 @@ const childProcess = require('child_process')
 
 jest.mock('child_process', () => {
   return {
-    spawn: jest.fn((cmd, args, options) => {
+    spawn: jest.fn(() => {
       return true
     })
   }

@@ -117,7 +117,11 @@ Promise.resolve()
     return { install: true }
   })
   .then((status) => {
-    if (status && status.hasOwnProperty('install') && status.install === true) {
+    if (
+      status &&
+      Object.prototype.hasOwnProperty.call(status, 'install') &&
+      status.install === true
+    ) {
       pkgMgr.process(cliArgs.packageManager)
     }
   })

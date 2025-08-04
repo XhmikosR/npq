@@ -6,12 +6,11 @@
 // This tests the key logic change: process.env.NPQ_PKG_MGR || values.packageManager || values.pkgMgr || 'npm'
 
 const packageManager = require('../lib/packageManager')
-
 const childProcess = require('child_process')
 
 jest.mock('child_process', () => {
   return {
-    spawn: jest.fn((cmd, options) => {
+    spawn: jest.fn(() => {
       return { pid: 12345 }
     })
   }

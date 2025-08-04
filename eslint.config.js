@@ -1,5 +1,5 @@
 const eslint = require('eslint')
-const { defineConfig, globalIgnores } = require('eslint/config')
+const { globalIgnores } = require('eslint/config')
 
 const pluginSecurity = require('eslint-plugin-security')
 
@@ -23,10 +23,6 @@ module.exports = [
       'security/detect-object-injection': 'warn',
       'security/detect-possible-timing-attacks': 'error',
       'security/detect-pseudoRandomBytes': 'error'
-    },
-    languageOptions: {
-      ecmaVersion: 2024,
-      sourceType: 'module'
     }
   }
 ]

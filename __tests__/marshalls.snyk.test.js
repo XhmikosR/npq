@@ -1,7 +1,7 @@
 'use strict'
 
-const fs = require('fs')
-const os = require('os')
+const fs = require('node:fs')
+const os = require('node:os')
 const Marshall = require('../lib/marshalls/snyk.marshall.js')
 
 jest.mock('fs')
@@ -13,7 +13,7 @@ fs.statSync.mockImplementation(() => {
 })
 
 // Mock fetch globally
-global.fetch = jest.fn()
+globalThis.fetch = jest.fn()
 
 const mockPackageRepoUtils = {
   getLatestVersion: jest.fn().mockResolvedValue('1.0.0')

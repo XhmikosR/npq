@@ -1,7 +1,7 @@
 'use strict'
 
+const childProcess = require('node:child_process')
 const packageManager = require('../lib/packageManager')
-const childProcess = require('child_process')
 
 jest.mock('child_process', () => {
   return {

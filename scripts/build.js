@@ -1,7 +1,7 @@
 'use strict'
 
-const fs = require('fs/promises')
-const path = require('path')
+const fs = require('node:fs/promises')
+const path = require('node:path')
 
 const TOP_PACKAGES_ASSET_URL =
   'https://github.com/lirantal/npm-rank/releases/download/latest/list-package-names.json'

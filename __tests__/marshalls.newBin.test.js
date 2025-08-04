@@ -41,7 +41,7 @@ describe('NewBinMarshall', () => {
       'dist-tags': {}
     }
     let latestTag = null
-    Object.keys(versions).forEach((vStr) => {
+    for (const vStr of Object.keys(versions)) {
       fullPackageData.versions[vStr] = {
         name: packageName,
         version: vStr,
@@ -51,10 +51,12 @@ describe('NewBinMarshall', () => {
       if (!latestTag || require('semver').gt(vStr, latestTag)) {
         latestTag = vStr
       }
-    })
+    }
+
     if (latestTag) {
       fullPackageData['dist-tags'].latest = latestTag
     }
+
     return fullPackageData
   }
 
@@ -242,7 +244,10 @@ describe('NewBinMarshall', () => {
     packageRepoUtilsMock.getPackageInfo.mockResolvedValue(mockPkgInfo)
     // Mock getSemVer to resolve 'latest' to '1.0.1'
     packageRepoUtilsMock.getSemVer.mockImplementation(async (name, version) => {
-      if (version === 'latest') return '1.0.1'
+      if (version === 'latest') {
+        return '1.0.1'
+      }
+
       return version
     })
 
@@ -355,7 +360,7 @@ describe('NewBinMarshall', () => {
     expect(newBinMarshall.ctx.marshalls.newBin.warnings[0].message).toContain(
       `introduces a new binary '${actualPackageName}'`
     )
-    expect(newBinMarshall.ctx.marshalls.newBin.warnings[0].message).toContain(`command: 'cli.js'`)
+    expect(newBinMarshall.ctx.marshalls.newBin.warnings[0].message).toContain("command: 'cli.js'")
   })
 
   it('should use pkg.packageName when newVersionData.name is falsy (line 40 coverage)', async () => {

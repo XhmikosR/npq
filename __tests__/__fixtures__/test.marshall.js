@@ -1,6 +1,6 @@
 'use strict'
 
-const BaseMarshall = require('../../lib/marshalls/baseMarshall')
+const BaseMarshall = require('../../lib/marshalls/baseMarshall.js')
 
 const MARSHALL_NAME = 'test.marshall'
 
@@ -30,10 +30,10 @@ class TestMarshall extends BaseMarshall {
 
         return data
       })
-      .catch((err) => {
+      .catch((error) => {
         this.setMessage({
           pkg: pkg.packageName,
-          message: err.message
+          message: error.message
         })
       })
   }
@@ -41,17 +41,17 @@ class TestMarshall extends BaseMarshall {
   validateSomething(pkg) {
     if (pkg.packageName === 'express' || pkg.packageName === 'semver') {
       return Promise.resolve()
-    } else {
-      return Promise.reject(new Error('simulating mock error'))
     }
+
+    return Promise.reject(new Error('simulating mock error'))
   }
 
   validate(pkg) {
     if (pkg.packageName === 'express' || pkg.packageName === 'semver') {
       return Promise.resolve('validation-result')
-    } else {
-      return Promise.reject(new Error('simulating mock error'))
     }
+
+    return Promise.reject(new Error('simulating mock error'))
   }
 }
 

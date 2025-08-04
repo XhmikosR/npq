@@ -1,7 +1,7 @@
 'use strict'
 
-const { prompt } = require('../lib/helpers/cliPrompt')
 const readline = require('node:readline/promises')
+const { prompt } = require('../lib/helpers/cliPrompt')
 
 // Mock readline module
 jest.mock('node:readline/promises', () => ({
@@ -159,21 +159,21 @@ describe('cliPrompt', () => {
       // Test the logic path for invalid input without actual recursion
       const invalidInputs = ['maybe', '1', 'true', 'false', 'ok', 'sure', 'xyz']
 
-      invalidInputs.forEach((input) => {
+      for (const input of invalidInputs) {
         const normalized = input.trim().toLowerCase()
         const isValidInput = ['y', 'yes', 'n', 'no'].includes(normalized)
         expect(isValidInput).toBe(false)
-      })
+      }
     })
 
     test('should recognize valid inputs correctly', () => {
       const validInputs = ['y', 'yes', 'n', 'no', 'Y', 'YES', 'N', 'NO', '  y  ', '  no  ']
 
-      validInputs.forEach((input) => {
+      for (const input of validInputs) {
         const normalized = input.trim().toLowerCase()
         const isValidInput = ['y', 'yes', 'n', 'no'].includes(normalized)
         expect(isValidInput).toBe(true)
-      })
+      }
     })
 
     test('should handle invalid input and retry successfully', async () => {
@@ -184,6 +184,7 @@ describe('cliPrompt', () => {
         if (callCount === 1) {
           return Promise.resolve('invalid')
         }
+
         return Promise.resolve('y')
       })
 
@@ -199,6 +200,7 @@ describe('cliPrompt', () => {
         if (interfaceCallCount === 1) {
           return mockRl
         }
+
         return mockRl2
       })
 
@@ -271,7 +273,8 @@ describe('cliPrompt', () => {
 
   describe('autoContinue', () => {
     const { autoContinue } = require('../lib/helpers/cliPrompt')
-    let mockWrite, originalWrite
+    let mockWrite
+    let originalWrite
 
     beforeEach(() => {
       // Mock process.stdout.write to capture output
@@ -328,7 +331,7 @@ describe('cliPrompt', () => {
 
       const result = await promise
       expect(result).toEqual({ default: true })
-    }, 10000) // 10 second timeout
+    }, 10_000) // 10 second timeout
 
     test('should write countdown to stdout', async () => {
       const promise = autoContinue({
@@ -376,7 +379,7 @@ describe('cliPrompt', () => {
 
       // Should write initial message with double digit
       expect(mockWrite).toHaveBeenCalledWith('Waiting 10')
-    }, 15000) // 15 second timeout
+    }, 15_000) // 15 second timeout
 
     test('should call console.log at the end', async () => {
       const mockConsoleLog = jest.spyOn(console, 'log').mockImplementation(() => {})
@@ -406,6 +409,6 @@ describe('cliPrompt', () => {
 
       // Should handle undefined name gracefully
       expect(result).toEqual({ undefined: true })
-    }, 10000) // 10 second timeout
+    }, 10_000) // 10 second timeout
   })
 })

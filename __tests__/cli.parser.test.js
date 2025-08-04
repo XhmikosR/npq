@@ -23,10 +23,10 @@ describe('NPQ_PKG_MGR Environment Variable Integration', () => {
   afterEach(() => {
     // Restore original values
     process.argv = originalArgv
-    if (originalNPQ_PKG_MGR !== undefined) {
-      process.env.NPQ_PKG_MGR = originalNPQ_PKG_MGR
-    } else {
+    if (originalNPQ_PKG_MGR === undefined) {
       delete process.env.NPQ_PKG_MGR
+    } else {
+      process.env.NPQ_PKG_MGR = originalNPQ_PKG_MGR
     }
 
     // Restore mocked methods
@@ -41,7 +41,7 @@ describe('NPQ_PKG_MGR Environment Variable Integration', () => {
 
     // Dynamically require to get fresh instance with environment variable set
     jest.resetModules()
-    const { CliParser } = require('../lib/cli')
+    const { CliParser } = require('../lib/cli.js')
 
     // Mock parseArgs to simulate command line input with --packageManager
     const originalParseArgs = require('node:util').parseArgs
@@ -64,7 +64,7 @@ describe('NPQ_PKG_MGR Environment Variable Integration', () => {
     delete process.env.NPQ_PKG_MGR
 
     jest.resetModules()
-    const { CliParser } = require('../lib/cli')
+    const { CliParser } = require('../lib/cli.js')
 
     const originalParseArgs = require('node:util').parseArgs
     require('node:util').parseArgs = jest.fn().mockReturnValue({
@@ -84,7 +84,7 @@ describe('NPQ_PKG_MGR Environment Variable Integration', () => {
     delete process.env.NPQ_PKG_MGR
 
     jest.resetModules()
-    const { CliParser } = require('../lib/cli')
+    const { CliParser } = require('../lib/cli.js')
 
     const originalParseArgs = require('node:util').parseArgs
     require('node:util').parseArgs = jest.fn().mockReturnValue({
@@ -104,7 +104,7 @@ describe('NPQ_PKG_MGR Environment Variable Integration', () => {
     process.env.NPQ_PKG_MGR = '' // Empty string
 
     jest.resetModules()
-    const { CliParser } = require('../lib/cli')
+    const { CliParser } = require('../lib/cli.js')
 
     const originalParseArgs = require('node:util').parseArgs
     require('node:util').parseArgs = jest.fn().mockReturnValue({

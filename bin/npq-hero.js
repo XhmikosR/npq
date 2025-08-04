@@ -2,16 +2,17 @@
 'use strict'
 
 // Require minimum node version or bail out
-const cliSupport = require('../lib/helpers/cliSupportHandler')
+const cliSupport = require('../lib/helpers/cliSupportHandler.js')
+
 cliSupport.isEnvSupport() || (cliSupport.noSupportError() && cliSupport.packageManagerPassthrough())
 
-const pkgMgr = require('../lib/packageManager')
-const Marshall = require('../lib/marshall')
-const { CliParser } = require('../lib/cli')
+const pkgMgr = require('../lib/packageManager.js')
+const Marshall = require('../lib/marshall.js')
+const { CliParser } = require('../lib/cli.js')
 const cliPrompt = require('../lib/helpers/cliPrompt.js')
-const { reportResults } = require('../lib/helpers/reportResults')
-const { Spinner } = require('../lib/helpers/cliSpinner')
-const { promiseThrottleHelper } = require('../lib/helpers/promiseThrottler')
+const { reportResults } = require('../lib/helpers/reportResults.js')
+const { Spinner } = require('../lib/helpers/cliSpinner.js')
+const { promiseThrottleHelper } = require('../lib/helpers/promiseThrottler.js')
 
 const PACKAGE_MANAGER_TOOL = process.env.NPQ_PKG_MGR
 
@@ -67,6 +68,7 @@ marshall
         countWarnings
       }
     }
+
     return undefined
   })
   .then((result) => {
@@ -77,15 +79,15 @@ marshall
         message: 'Continue install ?',
         default: false
       })
-    } else {
-      if (result && result.countWarnings > 0) {
-        console.log()
-        return cliPrompt.autoContinue({
-          name: 'install',
-          message: 'Auto-continue with install in... ',
-          timeInSeconds: 15
-        })
-      }
+    }
+
+    if (result && result.countWarnings > 0) {
+      console.log()
+      return cliPrompt.autoContinue({
+        name: 'install',
+        message: 'Auto-continue with install in... ',
+        timeInSeconds: 15
+      })
     }
 
     return { install: true }

@@ -49,7 +49,7 @@ describe('npq CLI script', () => {
     // Reset modules to ensure mocks are fresh for each test.
     jest.resetModules()
     // Clear mock history on the shared instance and the constructor.
-    const { Spinner } = require('../lib/helpers/cliSpinner')
+    const { Spinner } = require('../lib/helpers/cliSpinner.js')
     mockSpinnerInstance.start.mockClear()
     mockSpinnerInstance.stop.mockClear()
     Spinner.mockClear()
@@ -57,9 +57,9 @@ describe('npq CLI script', () => {
 
   test('should initialize and start spinner in interactive mode without --plain flag', async () => {
     // Arrange
-    const { CliParser } = require('../lib/cli')
-    const { isInteractiveTerminal } = require('../lib/helpers/cliSupportHandler')
-    const { Spinner } = require('../lib/helpers/cliSpinner')
+    const { CliParser } = require('../lib/cli.js')
+    const { isInteractiveTerminal } = require('../lib/helpers/cliSupportHandler.js')
+    const { Spinner } = require('../lib/helpers/cliSpinner.js')
 
     CliParser.parseArgsFull.mockReturnValue({ packages: ['express'], plain: false, dryRun: true })
     isInteractiveTerminal.mockReturnValue(true)
@@ -76,9 +76,9 @@ describe('npq CLI script', () => {
 
   test('should not initialize spinner when --plain flag is used', async () => {
     // Arrange
-    const { CliParser } = require('../lib/cli')
-    const { isInteractiveTerminal } = require('../lib/helpers/cliSupportHandler')
-    const { Spinner } = require('../lib/helpers/cliSpinner')
+    const { CliParser } = require('../lib/cli.js')
+    const { isInteractiveTerminal } = require('../lib/helpers/cliSupportHandler.js')
+    const { Spinner } = require('../lib/helpers/cliSpinner.js')
 
     CliParser.parseArgsFull.mockReturnValue({ packages: ['express'], plain: true, dryRun: true })
     isInteractiveTerminal.mockReturnValue(true)
@@ -94,9 +94,9 @@ describe('npq CLI script', () => {
 
   test('should not initialize spinner in non-interactive mode', async () => {
     // Arrange
-    const { CliParser } = require('../lib/cli')
-    const { isInteractiveTerminal } = require('../lib/helpers/cliSupportHandler')
-    const { Spinner } = require('../lib/helpers/cliSpinner')
+    const { CliParser } = require('../lib/cli.js')
+    const { isInteractiveTerminal } = require('../lib/helpers/cliSupportHandler.js')
+    const { Spinner } = require('../lib/helpers/cliSpinner.js')
 
     CliParser.parseArgsFull.mockReturnValue({ packages: ['express'], plain: false, dryRun: true })
     isInteractiveTerminal.mockReturnValue(false)

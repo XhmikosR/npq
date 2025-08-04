@@ -1,6 +1,6 @@
 'use strict'
 
-const helpers = require('./scriptHelpers')
+const helpers = require('./scriptHelpers.js')
 
 const runPreUninstall = async () => {
   const shellConfig = helpers.getShellConfig()

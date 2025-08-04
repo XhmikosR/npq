@@ -1,13 +1,12 @@
 'use strict'
 
-const fs = require('fs')
-const os = require('os')
-const path = require('path')
+const fs = require('node:fs')
+const os = require('node:os')
+const path = require('node:path')
 const cliPrompt = require('../lib/helpers/cliPrompt.js')
-
-const postinstall = require('../scripts/postinstall').testable
-const preuninstall = require('../scripts/preuninstall').testable
-const helpers = require('../scripts/scriptHelpers')
+const postinstall = require('../scripts/postinstall.js').testable
+const preuninstall = require('../scripts/preuninstall.js').testable
+const helpers = require('../scripts/scriptHelpers.js')
 
 const TEST_PROFILE_PATH = path.resolve(os.tmpdir(), '.npq_test_profile')
 const TEST_ALIAS = 'alias npm="npq-hero"'
@@ -35,11 +34,12 @@ afterEach(async () => {
   try {
     // eslint-disable-next-line security/detect-non-literal-fs-filename
     await fs.promises.unlink(TEST_PROFILE_PATH)
-  } catch (err) {
-    if (err.code === 'ENOENT') {
+  } catch (error) {
+    if (error.code === 'ENOENT') {
       return
     }
-    throw err
+
+    throw error
   }
 })
 

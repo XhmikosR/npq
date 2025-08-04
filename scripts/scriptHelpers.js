@@ -1,8 +1,8 @@
 'use strict'
 
-const fs = require('fs')
-const os = require('os')
-const path = require('path')
+const fs = require('node:fs')
+const os = require('node:os')
+const path = require('node:path')
 const semver = require('semver')
 
 const BASH_ZSH_ALIASES = '\nalias npm="npq-hero"\nalias yarn="NPQ_PKG_MGR=yarn npq-hero"\n'
@@ -22,16 +22,17 @@ module.exports.getShellConfig = () => {
   const shellPath = process.env.SHELL
   if (shellPath) {
     const shell = shellPath.split(path.sep).pop().replace('.exe', '')
-    if (SUPPORTED_SHELLS.indexOf(shell) > -1) {
+    if (SUPPORTED_SHELLS.includes(shell)) {
       return { name: shell, ...SHELLS[shell] }
     }
   }
+
   return null
 }
 
 module.exports.fileContains = async (profilePath, aliases) => {
   const profileData = await getProfile(profilePath)
-  return !!profileData && profileData.includes(aliases)
+  return Boolean(profileData) && profileData.includes(aliases)
 }
 
 module.exports.removeFromFile = async (profilePath, aliases) => {
@@ -39,6 +40,7 @@ module.exports.removeFromFile = async (profilePath, aliases) => {
   if (!profileData) {
     return
   }
+
   const newProfile = profileData.replace(aliases, '')
   // eslint-disable-next-line security/detect-non-literal-fs-filename
   await fs.promises.writeFile(profilePath, newProfile)
@@ -61,11 +63,13 @@ const getProfile = async (profilePath) => {
     // eslint-disable-next-line security/detect-non-literal-fs-filename
     const profileData = await fs.promises.readFile(profilePath, 'utf8')
     return profileData
-  } catch (err) {
-    if (err && err.code === 'ENOENT') {
+  } catch (error) {
+    if (error && error.code === 'ENOENT') {
       return null
-    } else if (err) {
-      throw err
+    }
+
+    if (error) {
+      throw error
     }
   }
 }

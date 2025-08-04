@@ -17,7 +17,7 @@ describe('Version Maturity Marshall', () => {
 
     const testMarshall = new Marshall({
       packageRepoUtils: {
-        getPackageInfo: () => {
+        getPackageInfo() {
           return Promise.resolve({
             time: {
               '1.0.0': hoursAgo.toISOString()
@@ -44,7 +44,7 @@ describe('Version Maturity Marshall', () => {
 
     const testMarshall = new Marshall({
       packageRepoUtils: {
-        getPackageInfo: () => {
+        getPackageInfo() {
           return Promise.resolve({
             time: {
               '1.0.0': daysAgo.toISOString()
@@ -71,7 +71,7 @@ describe('Version Maturity Marshall', () => {
 
     const testMarshall = new Marshall({
       packageRepoUtils: {
-        getPackageInfo: () => {
+        getPackageInfo() {
           return Promise.resolve({
             time: {
               '1.0.0': oneDayAgo.toISOString()
@@ -98,7 +98,7 @@ describe('Version Maturity Marshall', () => {
 
     const testMarshall = new Marshall({
       packageRepoUtils: {
-        getPackageInfo: () => {
+        getPackageInfo() {
           return Promise.resolve({
             time: {
               '1.0.0': weekAgo.toISOString()
@@ -123,7 +123,7 @@ describe('Version Maturity Marshall', () => {
   test('should throw error when package time information is missing', async () => {
     const testMarshall = new Marshall({
       packageRepoUtils: {
-        getPackageInfo: () => {
+        getPackageInfo() {
           return Promise.resolve({})
         },
         getSemVer: () => Promise.resolve('1.0.0')
@@ -141,7 +141,7 @@ describe('Version Maturity Marshall', () => {
   test('should throw error when version release date is missing', async () => {
     const testMarshall = new Marshall({
       packageRepoUtils: {
-        getPackageInfo: () => {
+        getPackageInfo() {
           return Promise.resolve({
             time: {
               '2.0.0': new Date().toISOString()
@@ -166,17 +166,18 @@ describe('Version Maturity Marshall', () => {
 
     const testMarshall = new Marshall({
       packageRepoUtils: {
-        getPackageInfo: () => {
+        getPackageInfo() {
           return Promise.resolve({
             time: {
               '1.2.3': daysAgo.toISOString()
             }
           })
         },
-        getSemVer: (packageName, packageVersion) => {
+        getSemVer(packageName, packageVersion) {
           if (packageVersion === 'latest') {
             return Promise.resolve('1.2.3')
           }
+
           return Promise.resolve(packageVersion)
         }
       }

@@ -2,8 +2,8 @@
 
 jest.mock('pacote')
 
-const ProvenanceMarshall = require('../lib/marshalls/provenance.marshall')
 const pacote = require('pacote')
+const ProvenanceMarshall = require('../lib/marshalls/provenance.marshall')
 
 describe('Provenance test suites', () => {
   beforeEach(() => {
@@ -14,7 +14,7 @@ describe('Provenance test suites', () => {
   test('has the right title', async () => {
     const testMarshall = new ProvenanceMarshall({
       packageRepoUtils: {
-        getPackageInfo: (pkgInfo) => {
+        getPackageInfo(pkgInfo) {
           return new Promise((resolve) => {
             resolve(pkgInfo)
           })
@@ -39,7 +39,7 @@ describe('Provenance test suites', () => {
         ]
       })
     }
-    global.fetch = jest.fn().mockImplementationOnce(() => Promise.resolve(mockResponse))
+    globalThis.fetch = jest.fn().mockImplementationOnce(() => Promise.resolve(mockResponse))
 
     pacote.manifest = jest.fn().mockResolvedValue({
       name: 'packageName',
@@ -58,7 +58,7 @@ describe('Provenance test suites', () => {
 
     const testMarshall = new ProvenanceMarshall({
       packageRepoUtils: {
-        getPackageInfo: () => {
+        getPackageInfo() {
           return new Promise((resolve) => {
             resolve({
               name: pkg.packageName,
@@ -66,7 +66,7 @@ describe('Provenance test suites', () => {
             })
           })
         },
-        parsePackageVersion: (pkgVersion) => {
+        parsePackageVersion(pkgVersion) {
           return {
             version: pkgVersion
           }
@@ -112,7 +112,7 @@ describe('Provenance test suites', () => {
         ]
       })
     }
-    global.fetch = jest.fn().mockImplementationOnce(() => Promise.resolve(mockResponse))
+    globalThis.fetch = jest.fn().mockImplementationOnce(() => Promise.resolve(mockResponse))
 
     const pkg = {
       packageName: 'packageName',
@@ -125,7 +125,7 @@ describe('Provenance test suites', () => {
 
     const testMarshall = new ProvenanceMarshall({
       packageRepoUtils: {
-        getPackageInfo: () => {
+        getPackageInfo() {
           return new Promise((resolve) => {
             resolve({
               name: pkg.packageName,
@@ -133,7 +133,7 @@ describe('Provenance test suites', () => {
             })
           })
         },
-        parsePackageVersion: (pkgVersion) => {
+        parsePackageVersion(pkgVersion) {
           return {
             version: pkgVersion
           }
@@ -164,7 +164,7 @@ describe('Provenance test suites', () => {
         ]
       })
     }
-    global.fetch = jest.fn().mockImplementationOnce(() => Promise.resolve(mockResponse))
+    globalThis.fetch = jest.fn().mockImplementationOnce(() => Promise.resolve(mockResponse))
 
     const pkg = {
       packageName: 'packageName',
@@ -178,7 +178,7 @@ describe('Provenance test suites', () => {
 
     const testMarshall = new ProvenanceMarshall({
       packageRepoUtils: {
-        getPackageInfo: () => {
+        getPackageInfo() {
           return new Promise((resolve) => {
             resolve({
               name: pkg.packageName,
@@ -186,7 +186,7 @@ describe('Provenance test suites', () => {
             })
           })
         },
-        parsePackageVersion: (pkgVersion) => {
+        parsePackageVersion(pkgVersion) {
           return {
             version: pkgVersion
           }
@@ -211,7 +211,7 @@ describe('Provenance test suites', () => {
         keys: [{ key: 'publicKey1' }]
       })
     }
-    global.fetch = jest.fn().mockResolvedValue(mockResponse)
+    globalThis.fetch = jest.fn().mockResolvedValue(mockResponse)
 
     const pkg = {
       packageName: 'test-package',
@@ -231,6 +231,7 @@ describe('Provenance test suites', () => {
             _attestations: { provenance: 'test' }
           })
         }
+
         return Promise.reject(new Error('No attestations'))
       })
       .mockImplementationOnce((manifest) => {
@@ -241,12 +242,13 @@ describe('Provenance test suites', () => {
             // No _attestations property
           })
         }
+
         return Promise.reject(new Error('No attestations'))
       })
 
     const testMarshall = new ProvenanceMarshall({
       packageRepoUtils: {
-        getPackageInfo: () => {
+        getPackageInfo() {
           return Promise.resolve({
             name: 'test-package',
             versions: {
@@ -270,7 +272,7 @@ describe('Provenance test suites', () => {
         keys: [{ key: 'publicKey1' }]
       })
     }
-    global.fetch = jest.fn().mockResolvedValue(mockResponse)
+    globalThis.fetch = jest.fn().mockResolvedValue(mockResponse)
 
     const pkg = {
       packageName: 'new-package',
@@ -285,7 +287,7 @@ describe('Provenance test suites', () => {
 
     const testMarshall = new ProvenanceMarshall({
       packageRepoUtils: {
-        getPackageInfo: () => {
+        getPackageInfo() {
           return Promise.resolve({
             name: 'new-package',
             versions: {
@@ -307,7 +309,7 @@ describe('Provenance test suites', () => {
         keys: [{ key: 'publicKey1' }]
       })
     }
-    global.fetch = jest.fn().mockResolvedValue(mockResponse)
+    globalThis.fetch = jest.fn().mockResolvedValue(mockResponse)
 
     const pkg = {
       packageName: 'test-package',
@@ -323,7 +325,7 @@ describe('Provenance test suites', () => {
 
     const testMarshall = new ProvenanceMarshall({
       packageRepoUtils: {
-        getPackageInfo: () => {
+        getPackageInfo() {
           return Promise.resolve({
             name: 'test-package',
             versions: {
@@ -347,7 +349,7 @@ describe('Provenance test suites', () => {
         keys: [{ key: 'publicKey1' }]
       })
     }
-    global.fetch = jest.fn().mockResolvedValue(mockResponse)
+    globalThis.fetch = jest.fn().mockResolvedValue(mockResponse)
 
     const pkg = {
       packageName: 'test-package',
@@ -363,7 +365,7 @@ describe('Provenance test suites', () => {
 
     const testMarshall = new ProvenanceMarshall({
       packageRepoUtils: {
-        getPackageInfo: () => {
+        getPackageInfo() {
           return Promise.resolve({
             name: 'test-package',
             versions: {

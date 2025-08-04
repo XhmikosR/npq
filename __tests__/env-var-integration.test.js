@@ -5,13 +5,13 @@
 // Test the NPQ_PKG_MGR environment variable functionality
 // This tests the key logic change: process.env.NPQ_PKG_MGR || values.packageManager || values.pkgMgr || 'npm'
 
+const childProcess = require('node:child_process')
 const packageManager = require('../lib/packageManager')
-const childProcess = require('child_process')
 
 jest.mock('child_process', () => {
   return {
     spawn: jest.fn(() => {
-      return { pid: 12345 }
+      return { pid: 12_345 }
     })
   }
 })
@@ -26,10 +26,10 @@ describe('NPQ_PKG_MGR Environment Variable Integration', () => {
   })
 
   afterEach(() => {
-    if (originalNPQ_PKG_MGR !== undefined) {
-      process.env.NPQ_PKG_MGR = originalNPQ_PKG_MGR
-    } else {
+    if (originalNPQ_PKG_MGR === undefined) {
       delete process.env.NPQ_PKG_MGR
+    } else {
+      process.env.NPQ_PKG_MGR = originalNPQ_PKG_MGR
     }
   })
 

@@ -11,8 +11,8 @@ jest.mock('pacote', () => {
   }
 })
 
-const SignaturesMarshall = require('../lib/marshalls/signatures.marshall')
 const pacote = require('pacote')
+const SignaturesMarshall = require('../lib/marshalls/signatures.marshall')
 
 describe('Signature test suites', () => {
   beforeEach(() => {
@@ -23,7 +23,7 @@ describe('Signature test suites', () => {
   test('has the right title', async () => {
     const testMarshall = new SignaturesMarshall({
       packageRepoUtils: {
-        getPackageInfo: (pkgInfo) => {
+        getPackageInfo(pkgInfo) {
           return new Promise((resolve) => {
             resolve(pkgInfo)
           })
@@ -48,11 +48,11 @@ describe('Signature test suites', () => {
         ]
       })
     }
-    global.fetch = jest.fn().mockImplementationOnce(() => Promise.resolve(mockResponse))
+    globalThis.fetch = jest.fn().mockImplementationOnce(() => Promise.resolve(mockResponse))
 
     const testMarshall = new SignaturesMarshall({
       packageRepoUtils: {
-        getPackageInfo: (pkgInfo) => {
+        getPackageInfo(pkgInfo) {
           return new Promise((resolve) => {
             resolve(pkgInfo)
           })
@@ -104,7 +104,7 @@ describe('Signature test suites', () => {
         ]
       })
     }
-    global.fetch = jest.fn().mockImplementationOnce(() => Promise.resolve(mockResponse))
+    globalThis.fetch = jest.fn().mockImplementationOnce(() => Promise.resolve(mockResponse))
 
     // the manifest() method should throw an error
     // in this jest mock to simulate a problem:
@@ -112,7 +112,7 @@ describe('Signature test suites', () => {
 
     const testMarshall = new SignaturesMarshall({
       packageRepoUtils: {
-        getPackageInfo: (pkgInfo) => {
+        getPackageInfo(pkgInfo) {
           return new Promise((resolve) => {
             resolve(pkgInfo)
           })

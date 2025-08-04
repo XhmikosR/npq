@@ -4,7 +4,7 @@ const RepoMarshall = require('../lib/marshalls/repo.marshall')
 
 const testMarshall = new RepoMarshall({
   packageRepoUtils: {
-    getPackageInfo: (pkgInfo) => {
+    getPackageInfo(pkgInfo) {
       return new Promise((resolve) => {
         resolve(pkgInfo)
       })
@@ -80,7 +80,7 @@ describe('Repo test suites', () => {
   })
 
   test('throws the right error when the repository url does not exist', async () => {
-    global.fetch = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('error')))
+    globalThis.fetch = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('error')))
 
     await expect(testMarshall.validate(fullPkgData)).rejects.toThrow(
       'No valid repository is associated with the package'
@@ -88,7 +88,7 @@ describe('Repo test suites', () => {
   })
 
   test('throws the right error when the repository url is unreachable', async () => {
-    global.fetch = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('error')))
+    globalThis.fetch = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('error')))
 
     fullPkgData.packageName.versions['1.0.0'].repository.url =
       'https://dsfsdfsdfs.abcdeugwecwekjasda.com/'
@@ -98,7 +98,7 @@ describe('Repo test suites', () => {
   })
 
   test('throws the right error when the homepage url does not exist', async () => {
-    global.fetch = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('error')))
+    globalThis.fetch = jest.fn().mockImplementationOnce(() => Promise.reject(new Error('error')))
 
     const pkgData = {
       packageName: {
@@ -120,7 +120,7 @@ describe('Repo test suites', () => {
   })
 
   test('does not throw any errors if the url exists', async () => {
-    global.fetch = jest.fn().mockImplementationOnce(() => Promise.resolve('success'))
+    globalThis.fetch = jest.fn().mockImplementationOnce(() => Promise.resolve('success'))
 
     fullPkgData.packageName.versions['1.0.0'].repository.url = 'https://google.com'
     await expect(testMarshall.validate(fullPkgData)).resolves.toEqual(expect.anything())

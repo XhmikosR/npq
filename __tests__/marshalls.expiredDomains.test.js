@@ -4,7 +4,7 @@ const ExpiredDomainsMarshall = require('../lib/marshalls/expiredDomains.marshall
 
 const testMarshall = new ExpiredDomainsMarshall({
   packageRepoUtils: {
-    getPackageInfo: (pkgInfo) => {
+    getPackageInfo(pkgInfo) {
       return new Promise((resolve) => {
         resolve(pkgInfo)
       })
@@ -76,7 +76,7 @@ describe('Expired domains test suites', () => {
   })
 
   test('does not throw any errors if the domain resolves well', async () => {
-    jest.setTimeout(15000)
+    jest.setTimeout(15_000)
 
     const pkgData = {
       packageName: {

@@ -4,17 +4,18 @@
 const util = require('node:util')
 
 // Require minimum node version or bail out
-const cliSupport = require('../lib/helpers/cliSupportHandler')
+const cliSupport = require('../lib/helpers/cliSupportHandler.js')
+
 cliSupport.isEnvSupport() || cliSupport.noSupportError(true)
 
-const { getProjectPackages } = require('../lib/helpers/sourcePackages')
-const { CliParser } = require('../lib/cli')
-const pkgMgr = require('../lib/packageManager')
-const Marshall = require('../lib/marshall')
+const { getProjectPackages } = require('../lib/helpers/sourcePackages.js')
+const { CliParser } = require('../lib/cli.js')
+const pkgMgr = require('../lib/packageManager.js')
+const Marshall = require('../lib/marshall.js')
 const cliPrompt = require('../lib/helpers/cliPrompt.js')
-const { reportResults } = require('../lib/helpers/reportResults')
-const { Spinner } = require('../lib/helpers/cliSpinner')
-const { promiseThrottleHelper } = require('../lib/helpers/promiseThrottler')
+const { reportResults } = require('../lib/helpers/reportResults.js')
+const { Spinner } = require('../lib/helpers/cliSpinner.js')
+const { promiseThrottleHelper } = require('../lib/helpers/promiseThrottler.js')
 
 const debug = util.debuglog('npq')
 
@@ -86,6 +87,7 @@ Promise.resolve()
         countWarnings
       }
     }
+
     return undefined
   })
   .then((result) => {
@@ -103,15 +105,15 @@ Promise.resolve()
         message: 'Continue install ?',
         default: false
       })
-    } else {
-      if (result && result.countWarnings > 0) {
-        console.log()
-        return cliPrompt.autoContinue({
-          name: 'install',
-          message: 'Auto-continue with install in... ',
-          timeInSeconds: 15
-        })
-      }
+    }
+
+    if (result && result.countWarnings > 0) {
+      console.log()
+      return cliPrompt.autoContinue({
+        name: 'install',
+        message: 'Auto-continue with install in... ',
+        timeInSeconds: 15
+      })
     }
 
     return { install: true }

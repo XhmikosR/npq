@@ -23,9 +23,9 @@ beforeEach(() => {
     'BUILDKITE',
     'DRONE'
   ]
-  ciVars.forEach((envVar) => {
+  for (const envVar of ciVars) {
     delete process.env[envVar]
-  })
+  }
 })
 
 afterEach(() => {
@@ -499,10 +499,10 @@ describe('reportResults', () => {
       'Dependencies are outdated'
     ]
 
-    expectedMessages.forEach((message) => {
+    for (const message of expectedMessages) {
       expect(result.resultsForPrettyPrint).toContain(message)
       expect(result.resultsForPlainTextPrint).toContain(message)
-    })
+    }
   })
 
   test('should include summary statistics in both formats', () => {
@@ -539,9 +539,9 @@ describe('reportResults', () => {
       'useRichFormatting'
     ]
 
-    expectedProperties.forEach((prop) => {
+    for (const prop of expectedProperties) {
       expect(result).toHaveProperty(prop)
-    })
+    }
   })
 
   test('should include JSON format with original data structure', () => {

@@ -1,11 +1,10 @@
 'use strict'
 
-const fs = require('fs')
+const fs = require('node:fs')
 const { styleText } = require('node:util')
 const semver = require('semver')
-
 const cliPrompt = require('../lib/helpers/cliPrompt.js')
-const helpers = require('./scriptHelpers')
+const helpers = require('./scriptHelpers.js')
 
 const runPostInstall = async () => {
   if (helpers.isRunningInYarn()) {
@@ -48,12 +47,13 @@ const runPostInstall = async () => {
       await fs.promises.appendFile(shellConfig.profilePath, shellConfig.aliases)
       console.log(styleText('green', '✔'), 'Reload your shell profile to use npq!')
     }
-  } catch (err) {
-    if (err.isTtyError) {
+  } catch (error) {
+    if (error.isTtyError) {
       // Could not render inquirer prompt; abort auto-install
       return
     }
-    console.error(styleText('red', 'Failed to add aliases: '), err)
+
+    console.error(styleText('red', 'Failed to add aliases: '), error)
   }
 }
 

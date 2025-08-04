@@ -1,6 +1,6 @@
 'use strict'
 
-const path = require('path')
+const path = require('node:path')
 const marshalls = require('../lib/marshalls')
 
 const PackageRepoUtilsMock = class Fake {
@@ -93,6 +93,7 @@ test('running marshall tasks filters out not found packages when multiple packag
       if (packageName === 'nonexistent-package') {
         return Promise.resolve({ error: 'Not found' })
       }
+
       return Promise.resolve(true)
     }
   }
@@ -112,7 +113,7 @@ test('running marshall tasks filters out not found packages when multiple packag
 
   const result = await marshalls.tasks(config)
 
-  expect(result[0]['not_found']).toEqual({
+  expect(result[0].not_found).toEqual({
     status: null,
     errors: [{ pkg: 'nonexistent-package', message: 'Package not found' }],
     warnings: [],

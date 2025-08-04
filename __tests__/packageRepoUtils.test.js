@@ -2,7 +2,7 @@
 
 const PackageRepoUtils = require('../lib/helpers/packageRepoUtils')
 
-global.fetch = jest.fn().mockImplementation(() =>
+globalThis.fetch = jest.fn().mockImplementation(() =>
   Promise.resolve({
     json: () => require('./mocks/registryPackageOk.mock.json')
   })
@@ -64,7 +64,7 @@ test('repo utils retrieves package README information', async () => {
 
 test('repo utils retrieves package latest version as null if not exists', async () => {
   const PackageRepoUtils = require('../lib/helpers/packageRepoUtils')
-  global.fetch = jest.fn().mockImplementation(() =>
+  globalThis.fetch = jest.fn().mockImplementation(() =>
     Promise.resolve({
       json: () => require('./mocks/registryPackageUnpublished.mock.json')
     })
@@ -78,7 +78,7 @@ test('repo utils retrieves package latest version as null if not exists', async 
 
 test('repo utils retrieves package download count', async () => {
   const PackageRepoUtils = require('../lib/helpers/packageRepoUtils')
-  global.fetch = jest.fn().mockImplementation(() =>
+  globalThis.fetch = jest.fn().mockImplementation(() =>
     Promise.resolve({
       json: () => ({
         downloads: 1950,
@@ -97,7 +97,7 @@ test('repo utils retrieves package download count', async () => {
 
 test('repo utils retrieves package README information even when not available', async () => {
   const PackageRepoUtils = require('../lib/helpers/packageRepoUtils')
-  global.fetch = jest.fn().mockImplementation(() =>
+  globalThis.fetch = jest.fn().mockImplementation(() =>
     Promise.resolve({
       json: () => require('./mocks/registryPackageUnpublished.mock.json')
     })
@@ -111,7 +111,7 @@ test('repo utils retrieves package README information even when not available', 
 
 test('repo utils retrieves package LICENSE information', async () => {
   const PackageRepoUtils = require('../lib/helpers/packageRepoUtils')
-  global.fetch = jest.fn().mockImplementation(() =>
+  globalThis.fetch = jest.fn().mockImplementation(() =>
     Promise.resolve({
       json: () => require('./mocks/registryPackageOk.mock.json')
     })
@@ -125,7 +125,7 @@ test('repo utils retrieves package LICENSE information', async () => {
 
 test('repo utils parses package version', async () => {
   const PackageRepoUtils = require('../lib/helpers/packageRepoUtils')
-  global.fetch = jest.fn().mockImplementation(() =>
+  globalThis.fetch = jest.fn().mockImplementation(() =>
     Promise.resolve({
       json: () => require('./mocks/registryPackageOk.mock.json')
     })
@@ -141,7 +141,7 @@ test('repo utils parses package version', async () => {
 
 test('repo utils returns valid semver for different cases of version asked', async () => {
   const PackageRepoUtils = require('../lib/helpers/packageRepoUtils')
-  global.fetch = jest.fn().mockImplementation(() =>
+  globalThis.fetch = jest.fn().mockImplementation(() =>
     Promise.resolve({
       json: () => require('./mocks/registryPackageOk.mock.json')
     })
@@ -165,7 +165,7 @@ test('repo utils returns valid semver for different cases of version asked', asy
 
 test('repo utils resolves semver ranges by finding the highest satisfying version', async () => {
   const PackageRepoUtils = require('../lib/helpers/packageRepoUtils')
-  global.fetch = jest.fn().mockImplementation(() =>
+  globalThis.fetch = jest.fn().mockImplementation(() =>
     Promise.resolve({
       json: () => require('./mocks/registryPackageOk.mock.json')
     })
@@ -219,7 +219,7 @@ test('repo utils resolves semver ranges with multiple versions', async () => {
     }
   }
 
-  global.fetch = jest.fn().mockImplementation(() =>
+  globalThis.fetch = jest.fn().mockImplementation(() =>
     Promise.resolve({
       json: () => comprehensiveMock
     })
